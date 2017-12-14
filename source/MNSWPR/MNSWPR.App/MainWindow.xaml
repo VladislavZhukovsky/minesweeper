@@ -3,15 +3,27 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:MNSWPR.App.Controls"
         xmlns:local="clr-namespace:MNSWPR.App"
         mc:Ignorable="d"
-        Title="MNSWPR" Height="400" Width="300">
-    <Grid>
+        Title="MNSWPR" Height="380" Width="308">
+    <Grid Height="350" Width="300">
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="300"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Name="Field" Grid.Row="0" VerticalAlignment="Top" Height="300">
+        <Grid Name="field" Grid.Row="0" VerticalAlignment="Top" Height="300" Width="300">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
         </Grid>
         <Button Name="Start" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" Grid.Row="1" Height="30" Width="80">Start!</Button>
     </Grid>

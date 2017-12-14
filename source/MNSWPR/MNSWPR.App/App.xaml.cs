@@ -13,6 +13,9 @@ namespace MNSWPR.App
     /// </summary>
     public partial class App : Application
     {
-
+        public App()
+        {
+            this.MainWindow = new MainWindow();
+        }
     }
 }

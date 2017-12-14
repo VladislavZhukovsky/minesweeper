@@ -13,30 +13,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MNSWPR.App
+namespace MNSWPR.App.Controls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Cell.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Cell : UserControl
     {
-        public MainWindow()
+        public Cell()
         {
             InitializeComponent();
-            InitializeField();
+            MouseUp += Cell_MouseUp;
         }
 
-        private void InitializeField()
+        private void Cell_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            for (var i = 0; i < 2; i++)
-            {
-                for(var j = 0; j < 2; j++)
-                {
-                    var c = new Controls.Cell();
-                    c.Name = string.Format("c{0}{1}", i, j);
-                    field.Children.Add(c);
-                }
-            }
+            text.Text = "0";
         }
     }
 }
