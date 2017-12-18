@@ -20,6 +20,8 @@ namespace MNSWPR.App
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<Controls.Cell> cells = new List<Controls.Cell>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -28,14 +30,34 @@ namespace MNSWPR.App
 
         private void InitializeField()
         {
-            for (var i = 0; i < 2; i++)
+            var rows = 4;
+            var cols = 4;
+
+            for (var i = 0; i < rows; i++)
             {
-                for(var j = 0; j < 2; j++)
+                field.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+                for (var j = 0; j < cols; j++)
                 {
-                    var c = new Controls.Cell();
-                    c.Name = string.Format("c{0}{1}", i, j);
-                    field.Children.Add(c);
+                    field.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+                    var cell = new Controls.Cell();
+                    cell.Name = string.Format("c{0}{1}", i, j);
+
+                    cell.Mined = (cell.Name == "c21" || cell.Name == "c33");
+
+                    cell.SetValue(Grid.RowProperty, i);
+                    cell.SetValue(Grid.ColumnProperty, j);
+                    cell.text.Visibility = Visibility.Hidden;
+                    field.Children.Add(cell);
+                    cells.Add(cell);
                 }
+            }
+        }
+
+        private void Start_Click(object sender, RoutedEventArgs e)
+        {
+            foreach(var cell in cells)
+            {
+                cell.text.Visibility = Visibility.Visible;
             }
         }
     }

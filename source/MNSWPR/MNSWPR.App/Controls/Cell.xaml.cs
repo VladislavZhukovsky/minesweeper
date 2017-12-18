@@ -20,15 +20,30 @@ namespace MNSWPR.App.Controls
     /// </summary>
     public partial class Cell : UserControl
     {
+        private bool mined;
         public Cell()
         {
             InitializeComponent();
             MouseUp += Cell_MouseUp;
         }
 
+        public bool Mined
+        {
+            get
+            {
+                return mined;
+            }
+            set
+            {
+                mined = value;
+                text.Text = mined ? "1" : "0";
+            }
+        }
+
         private void Cell_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            text.Text = "0";
+            cellField.Background = mined ? Brushes.Red : Brushes.Yellow;
+            text.Visibility = Visibility.Visible;
         }
     }
 }
