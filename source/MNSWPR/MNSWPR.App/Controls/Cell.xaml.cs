@@ -21,6 +21,7 @@ namespace MNSWPR.App.Controls
     public partial class Cell : UserControl
     {
         private bool mined;
+        private bool clicked;
         public Cell()
         {
             InitializeComponent();
@@ -42,8 +43,12 @@ namespace MNSWPR.App.Controls
 
         private void Cell_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            cellField.Background = mined ? Brushes.Red : Brushes.Yellow;
-            text.Visibility = Visibility.Visible;
+            if (!clicked)
+            {
+                cellField.Background = mined ? Brushes.Red : Brushes.Green;
+                text.Visibility = Visibility.Visible;
+                clicked = true;
+            }
         }
     }
 }

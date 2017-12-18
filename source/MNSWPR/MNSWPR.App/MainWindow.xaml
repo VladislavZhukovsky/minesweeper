@@ -6,7 +6,7 @@
         xmlns:controls="clr-namespace:MNSWPR.App.Controls"
         xmlns:local="clr-namespace:MNSWPR.App"
         mc:Ignorable="d"
-        Title="MNSWPR" Height="380" Width="308">
+        Title="MNSWPR" ResizeMode="NoResize" Height="380" Width="316">
     <Grid Height="350" Width="300">
         <Grid.RowDefinitions>
             <RowDefinition Height="300"></RowDefinition>

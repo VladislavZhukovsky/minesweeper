@@ -30,8 +30,8 @@ namespace MNSWPR.App
 
         private void InitializeField()
         {
-            var rows = 4;
-            var cols = 4;
+            var rows = 10;
+            var cols = 10;
 
             for (var i = 0; i < rows; i++)
             {
@@ -42,7 +42,7 @@ namespace MNSWPR.App
                     var cell = new Controls.Cell();
                     cell.Name = string.Format("c{0}{1}", i, j);
 
-                    cell.Mined = (cell.Name == "c21" || cell.Name == "c33");
+                    cell.Mined = (cell.Name == "c21" || cell.Name == "c33" || cell.Name == "c42");
 
                     cell.SetValue(Grid.RowProperty, i);
                     cell.SetValue(Grid.ColumnProperty, j);
