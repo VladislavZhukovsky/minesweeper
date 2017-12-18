@@ -28,6 +28,7 @@ namespace MNSWPR.App.Controls
             MouseUp += Cell_MouseUp;
         }
 
+        //remove from UI element
         public bool Mined
         {
             get
