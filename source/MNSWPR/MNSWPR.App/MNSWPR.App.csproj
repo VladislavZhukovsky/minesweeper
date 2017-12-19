@@ -100,5 +100,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MNSWPR.Core\MNSWPR.Core.csproj">
+      <Project>{e0a7f805-836b-4378-aaa8-04d60e1c6ac0}</Project>
+      <Name>MNSWPR.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
