@@ -10,13 +10,16 @@ namespace MNSWPR.Core
     {
         public int[] GetRandomNumbers(int count, int maxValue)
         {
-            var numbers = new int[count];
-            var r = new Random(DateTime.Now.GetHashCode());
-            for(var i = 0; i < count; i++)
+            var result = new int[count];
+            var range = Enumerable.Range(0, maxValue).ToList();
+            var random = new Random(DateTime.Now.GetHashCode());
+            for (var i = 0; i < count; i++)
             {
-                numbers[i] = r.Next(maxValue);
+                var nextIndex = random.Next(maxValue - i);
+                result[i] = range[nextIndex];
+                range.RemoveAt(nextIndex);
             }
-            return numbers;
+            return result;
         }
     }
 }
