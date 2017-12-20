@@ -30,10 +30,11 @@ namespace MNSWPR.App
 
         private void InitializeField()
         {
-            var rows = 5;
-            var cols = 5;
+            var rows = 10;
+            var cols = 10;
+            var mineCount = 10;
 
-            var coreField = new Core.Field(rows, cols);
+            var coreField = new Core.Field(rows, cols, mineCount);
 
             for (var i = 0; i < rows; i++)
             {
@@ -55,10 +56,11 @@ namespace MNSWPR.App
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-            foreach(var cell in cells)
-            {
-                cell.text.Visibility = Visibility.Visible;
-            }
+            //foreach(var cell in cells)
+            //{
+            //    cell.text.Visibility = Visibility.Visible;
+            //}
+            InitializeField();
         }
     }
 }

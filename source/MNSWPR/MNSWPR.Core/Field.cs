@@ -10,15 +10,17 @@ namespace MNSWPR.Core
     {
         private int rows;
         private int cols;
+        private int mineCount;
 
         //keep ALL cells (not only mined) to access cell directly ( O(1) operation)
         //true if mined
         private bool[] cells;
 
-        public Field(int rows, int cols)
+        public Field(int rows, int cols, int mineCount)
         {
             this.rows = rows;
             this.cols = cols;
+            this.mineCount = mineCount;
             cells = new bool[rows * cols];
             SetMines();
         }
@@ -26,7 +28,7 @@ namespace MNSWPR.Core
         private void SetMines()
         {
             var r = new Randomizer();
-            var mineIndexes = r.GetRandomNumbers(5, rows * cols);
+            var mineIndexes = r.GetRandomNumbers(mineCount, rows * cols);
             foreach(var index in mineIndexes)
             {
                 cells[index] = true;

@@ -38,9 +38,8 @@ namespace MNSWPR.App.Controls
 
             InitializeComponent();
             MouseLeftButtonUp += Cell_MouseLeftButtonUp;
+            MouseRightButtonUp += Cell_MouseRightButtonUp;
         }
-
-                //text.Text = mined ? "1" : "0";
 
         private void Cell_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -54,10 +53,16 @@ namespace MNSWPR.App.Controls
                 else
                 {
                     cellField.Background = Brushes.Green;
+                    text.Text = coreField.CountMinesAround(row, col).ToString();
                     text.Visibility = Visibility.Visible;
                 }
                 clicked = true;
             }
+        }
+
+        private void Cell_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            cellField.Background = Brushes.Yellow;
         }
     }
 }
