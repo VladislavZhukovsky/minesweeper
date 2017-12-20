@@ -20,34 +20,42 @@ namespace MNSWPR.App.Controls
     /// </summary>
     public partial class Cell : UserControl
     {
-        private bool mined;
+        private int row;
+        private int col;
+        private Core.Field coreField;
+
         private bool clicked;
-        public Cell()
+
+        public Cell(int row, int col, Core.Field coreField)
         {
+            if (row < 0 || col < 0)
+            {
+                throw new ArgumentOutOfRangeException("Invalid cell coordinates");
+            }
+            this.row = row;
+            this.col = col;
+            this.coreField = coreField;
+
             InitializeComponent();
-            MouseUp += Cell_MouseUp;
+            MouseLeftButtonUp += Cell_MouseLeftButtonUp;
         }
 
-        //remove from UI element
-        public bool Mined
-        {
-            get
-            {
-                return mined;
-            }
-            set
-            {
-                mined = value;
-                text.Text = mined ? "1" : "0";
-            }
-        }
+                //text.Text = mined ? "1" : "0";
 
-        private void Cell_MouseUp(object sender, MouseButtonEventArgs e)
+        private void Cell_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (!clicked)
             {
-                cellField.Background = mined ? Brushes.Red : Brushes.Green;
-                text.Visibility = Visibility.Visible;
+                var mined = coreField.Mined(row, col);
+                if (mined)
+                {
+                    cellField.Background = Brushes.Red;
+                }
+                else
+                {
+                    cellField.Background = Brushes.Green;
+                    text.Visibility = Visibility.Visible;
+                }
                 clicked = true;
             }
         }
