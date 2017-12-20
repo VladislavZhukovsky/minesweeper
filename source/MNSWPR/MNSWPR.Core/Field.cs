@@ -42,31 +42,45 @@ namespace MNSWPR.Core
         {
             var result = 0;
             //N- North, S - south, E - East, W - West
-            int NWrow; int NWcol;
-            int Nrow;  int Ncol;
-            int NErow; int NEcol;
-            int Erow;  int Ecol;
-            int SErow; int SEcol;
-            int Srow;  int Scol;
-            int SWrow; int SWcol;
-            int Wrow;  int Wcol;
+            //int NWrow;
+            //int NWcol;
+            //int Nrow;
+            //int Ncol;
+            //int NErow;
+            //int NEcol;
+            //int Erow;
+            //int Ecol;
+            //int SErow;
+            //int SEcol;
+            //int Srow;
+            //int Scol;
+            //int SWrow;
+            //int SWcol;
+            //int Wrow;
+            //int Wcol;
 
+            //NWrow = Nrow = NErow = row - 1;
+            //Wrow = Erow = row;
+            //SWrow = Srow = SErow = row + 1;
+            //NWcol = Wcol = SWcol = col - 1;
+            //Ncol = Scol = col;
+            //NEcol = Ecol = SEcol = col + 1;
 
-            NWrow = Nrow = NErow = row - 1;
-            Wrow = Erow = row;
-            SWrow = Srow = SErow = row + 1;
-            NWcol = Wcol = SWcol = col - 1;
-            Ncol = Scol = col;
-            NEcol = Ecol = SEcol = col + 1;
+            var upRow     = row - 1;
+            var centerRow = row;
+            var downRow   = row + 1;
+            var leftCol   = col - 1;
+            var centerCol = col;
+            var rightCol  = col + 1;
 
-            if (IsValidCellCoordinates(NWrow,NWcol)) { if (Mined(NWrow, NWcol)) { result++; } }
-            if (IsValidCellCoordinates(Nrow ,Ncol )) { if (Mined(Nrow,  Ncol))  { result++; } }
-            if (IsValidCellCoordinates(NErow,NEcol)) { if (Mined(NErow, NEcol)) { result++; } }
-            if (IsValidCellCoordinates(Erow ,Ecol )) { if (Mined(Erow,  Ecol))  { result++; } }
-            if (IsValidCellCoordinates(SErow,SEcol)) { if (Mined(SErow, SEcol)) { result++; } }
-            if (IsValidCellCoordinates(Srow ,Scol )) { if (Mined(Srow,  Scol))  { result++; } }
-            if (IsValidCellCoordinates(SWrow,SWcol)) { if (Mined(SWrow, SWcol)) { result++; } }
-            if (IsValidCellCoordinates(Wrow ,Wcol )) { if (Mined(Wrow,  Wcol))  { result++; } }
+            if (IsValidCellCoordinates(upRow,     leftCol))   { if (Mined(upRow,     leftCol))   { result++; } }
+            if (IsValidCellCoordinates(upRow,     centerCol)) { if (Mined(upRow,     centerCol)) { result++; } }
+            if (IsValidCellCoordinates(upRow,     rightCol))  { if (Mined(upRow,     rightCol))  { result++; } }
+            if (IsValidCellCoordinates(centerRow, rightCol))  { if (Mined(centerRow, rightCol))  { result++; } }
+            if (IsValidCellCoordinates(downRow,   rightCol))  { if (Mined(downRow,   rightCol))  { result++; } }
+            if (IsValidCellCoordinates(downRow,   centerCol)) { if (Mined(downRow,   centerCol)) { result++; } }
+            if (IsValidCellCoordinates(downRow,   leftCol))   { if (Mined(downRow,   leftCol))   { result++; } }
+            if (IsValidCellCoordinates(centerRow, leftCol))   { if (Mined(centerRow, leftCol))   { result++; } }
 
             return result;
         }

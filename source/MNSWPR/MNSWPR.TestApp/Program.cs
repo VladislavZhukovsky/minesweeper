@@ -17,7 +17,7 @@ namespace MNSWPR.TestApp
 
             //for (var i = 0; i < rows; i++)
             //{
-            //    for(var j = 0; j < rows; j++)
+            //    for (var j = 0; j < rows; j++)
             //    {
             //        if (field.Mined(i, j))
             //            Console.Write(1);
