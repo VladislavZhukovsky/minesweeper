@@ -87,6 +87,29 @@ namespace MNSWPR.Core
             return result;
         }
 
+        public IEnumerable<Tuple<int, int>> GetMinesAround(int row, int col)
+        {
+            var result = new List<Tuple<int, int>>();
+
+            var upRow = row - 1;
+            var centerRow = row;
+            var downRow = row + 1;
+            var leftCol = col - 1;
+            var centerCol = col;
+            var rightCol = col + 1;
+
+            if (IsValidCellCoordinates(upRow, leftCol))      { result.Add(new Tuple<int, int>(upRow, leftCol)); }
+            if (IsValidCellCoordinates(upRow, centerCol))    { result.Add(new Tuple<int, int>(upRow, centerCol)); }
+            if (IsValidCellCoordinates(upRow, rightCol))     { result.Add(new Tuple<int, int>(upRow, rightCol)); }
+            if (IsValidCellCoordinates(centerRow, rightCol)) { result.Add(new Tuple<int, int>(centerRow, rightCol)); }
+            if (IsValidCellCoordinates(downRow, rightCol))   { result.Add(new Tuple<int, int>(downRow, rightCol)); }
+            if (IsValidCellCoordinates(downRow, centerCol))  { result.Add(new Tuple<int, int>(downRow, centerCol)); }
+            if (IsValidCellCoordinates(downRow, leftCol))    { result.Add(new Tuple<int, int>(downRow, leftCol)); }
+            if (IsValidCellCoordinates(centerRow, leftCol))  { result.Add(new Tuple<int, int>(centerRow, leftCol)); }
+
+            return result;
+        }
+
         /// <summary>
         /// Checks if the value is in specified range (including min and max value)
         /// </summary>

@@ -32,7 +32,7 @@ namespace MNSWPR.App
         {
             var rows = 10;
             var cols = 10;
-            var mineCount = 10;
+            var mineCount = 3;
 
             var coreField = new Core.Field(rows, cols, mineCount);
 
