@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MNSWPR.App.EventArgs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,9 +23,13 @@ namespace MNSWPR.App.Controls
     {
         private int row;
         private int col;
+        private CellState state;
         private Core.Field coreField;
 
-        private bool clicked;
+        public event ClickHandler EmptyCellClicked;
+        public event ClickHandler MinedCellClicked;
+        public delegate void ClickHandler(Cell clickedCell, EmptyCellClickedEventArgs args);
+
 
         public Cell(int row, int col, Core.Field coreField)
         {
@@ -34,17 +39,63 @@ namespace MNSWPR.App.Controls
             }
             this.row = row;
             this.col = col;
+            this.state = CellState.NotClicked;
             this.coreField = coreField;
-
             InitializeComponent();
             MouseLeftButtonUp += Cell_MouseLeftButtonUp;
             MouseRightButtonUp += Cell_MouseRightButtonUp;
         }
 
+        public int Row
+        {
+            get
+            {
+                return row;
+            }
+        }
+
+        public int Col
+        {
+            get
+            {
+                return col;
+            }
+        }
+
+        public CellState State
+        {
+            get
+            {
+                return state;
+            }
+        }
+
         private void Cell_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (!clicked)
+            Click();
+        }
+
+        private void Cell_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (state == CellState.NotClicked)
             {
+                cellField.Background = Brushes.Yellow;
+                state = CellState.FlagSet;
+                return;
+            }
+            if (state == CellState.FlagSet)
+            {
+                cellField.Background = Brushes.LightGray;
+                state = CellState.NotClicked;
+                return;
+            }
+        }
+
+        public void Click()
+        {
+            if (state == CellState.NotClicked)
+            {
+                state = CellState.Processing;
                 var mined = coreField.Mined(row, col);
                 if (mined)
                 {
@@ -53,16 +104,13 @@ namespace MNSWPR.App.Controls
                 else
                 {
                     cellField.Background = Brushes.Green;
-                    text.Text = coreField.CountMinesAround(row, col).ToString();
-                    text.Visibility = Visibility.Visible;
+                    if (EmptyCellClicked != null)
+                    {
+                        EmptyCellClicked(this, new EmptyCellClickedEventArgs());
+                    }
                 }
-                clicked = true;
+                state = CellState.Clicked;
             }
-        }
-
-        private void Cell_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            cellField.Background = Brushes.Yellow;
         }
     }
 }

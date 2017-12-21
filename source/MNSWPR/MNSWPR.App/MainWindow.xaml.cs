@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MNSWPR.App.Controls;
+using MNSWPR.App.EventArgs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +22,7 @@ namespace MNSWPR.App
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Core.Field coreField;
         private List<Controls.Cell> cells = new List<Controls.Cell>();
 
         public MainWindow()
@@ -30,11 +33,11 @@ namespace MNSWPR.App
 
         private void InitializeField()
         {
-            var rows = 10;
-            var cols = 10;
+            var rows = 5;
+            var cols = 5;
             var mineCount = 3;
 
-            var coreField = new Core.Field(rows, cols, mineCount);
+            coreField = new Core.Field(rows, cols, mineCount);
 
             for (var i = 0; i < rows; i++)
             {
@@ -42,15 +45,35 @@ namespace MNSWPR.App
                 for (var j = 0; j < cols; j++)
                 {
                     field.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
-                    var cell = new Controls.Cell(i, j, coreField);
+                    var cell = new Cell(i, j, coreField);
                     cell.Name = string.Format("c{0}{1}", i, j);
 
                     cell.SetValue(Grid.RowProperty, i);
                     cell.SetValue(Grid.ColumnProperty, j);
                     cell.text.Visibility = Visibility.Hidden;
                     field.Children.Add(cell);
+                    cell.EmptyCellClicked += OnEmptyCellClicked;
                     cells.Add(cell);
                 }
+            }
+        }
+
+        private void OnEmptyCellClicked(Cell clickedCell, EmptyCellClickedEventArgs args)
+        {
+            var cellsAround = coreField.GetCellsAround(clickedCell.Row, clickedCell.Col);
+            var minesAround = cellsAround.Count(x => coreField.Mined(x.Row, x.Col));
+            if (minesAround == 0)
+            {
+                foreach (var coordinates in cellsAround)
+                {
+                    var cell = cells.Single(x => x.Row == coordinates.Row && x.Col == coordinates.Col);
+                    cell.Click();
+                }
+            }
+            else
+            {
+                clickedCell.text.Text = minesAround.ToString();
+                clickedCell.text.Visibility = Visibility.Visible;
             }
         }
 
@@ -61,6 +84,10 @@ namespace MNSWPR.App
             //    cell.text.Visibility = Visibility.Visible;
             //}
             InitializeField();
+        }
+        private void CellClicked(int row, int col)
+        {
+            throw new NotImplementedException();
         }
     }
 }
