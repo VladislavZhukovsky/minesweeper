@@ -110,6 +110,23 @@ namespace MNSWPR.Core
             return result;
         }
 
+        public void ReplaceBombFromCell(int row, int col)
+        {
+            var emptyCells = new List<int>();
+            for(var i = 0; i < cells.Count(); i++)
+            {
+                if (!cells[i])
+                {
+                    emptyCells.Add(i);
+                }
+            }
+            var randomizer = new Randomizer();
+            var r = randomizer.GetRandomNumber(emptyCells.Count() - 1);
+            var newMinedCellIndex = emptyCells[r];
+            cells[newMinedCellIndex] = true;
+            cells[row * rows + col] = false;
+        }
+
         /// <summary>
         /// Checks if the value is in specified range (including min and max value)
         /// </summary>

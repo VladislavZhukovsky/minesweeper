@@ -21,5 +21,11 @@ namespace MNSWPR.Core
             }
             return result;
         }
+
+        public int GetRandomNumber(int maxValue)
+        {
+            var random = new Random(DateTime.Now.GetHashCode());
+            return random.Next(maxValue);
+        }
     }
 }
