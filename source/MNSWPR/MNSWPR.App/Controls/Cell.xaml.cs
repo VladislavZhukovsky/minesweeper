@@ -21,18 +21,21 @@ namespace MNSWPR.App.Controls
     /// </summary>
     public partial class Cell : UserControl
     {
+        private MainWindow parent;
+
         private int row;
         private int col;
         private CellState state;
-        private Core.Field coreField;
+        //private Core.Field coreField;
 
         public event ClickHandler EmptyCellClicked;
         public event ClickHandler MinedCellClicked;
         public delegate void ClickHandler(Cell clickedCell, EmptyCellClickedEventArgs args);
 
 
-        public Cell(int row, int col, Core.Field coreField)
+        public Cell(int row, int col, MainWindow parent)
         {
+            this.parent = parent;
             if (row < 0 || col < 0)
             {
                 throw new ArgumentOutOfRangeException("Invalid cell coordinates");
@@ -40,7 +43,7 @@ namespace MNSWPR.App.Controls
             this.row = row;
             this.col = col;
             this.state = CellState.NotClicked;
-            this.coreField = coreField;
+            //this.coreField = coreField;
             InitializeComponent();
             MouseLeftButtonUp += Cell_MouseLeftButtonUp;
             MouseRightButtonUp += Cell_MouseRightButtonUp;
@@ -72,6 +75,14 @@ namespace MNSWPR.App.Controls
 
         private void Cell_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            if (!parent.FirstStepDone)
+            {
+                if (parent.Field.Mined(row, col))
+                {
+                    parent.Field.ReplaceBombFromCell(row, col);
+                }
+                parent.FirstStepDone = true;
+            }
             Click();
         }
 
@@ -96,7 +107,7 @@ namespace MNSWPR.App.Controls
             if (state == CellState.NotClicked)
             {
                 state = CellState.Processing;
-                var mined = coreField.Mined(row, col);
+                var mined = parent.Field.Mined(row, col);
                 if (mined)
                 {
                     cellField.Background = Brushes.Red;

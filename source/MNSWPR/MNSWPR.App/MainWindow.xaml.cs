@@ -31,11 +31,21 @@ namespace MNSWPR.App
             InitializeField();
         }
 
+        public Core.Field Field
+        {
+            get
+            {
+                return coreField;
+            }
+        }
+
+        public bool FirstStepDone { get; set; }
+
         private void InitializeField()
         {
-            var rows = 5;
-            var cols = 5;
-            var mineCount = 3;
+            var rows = 10;
+            var cols = 10;
+            var mineCount = 13;
 
             coreField = new Core.Field(rows, cols, mineCount);
 
@@ -45,7 +55,7 @@ namespace MNSWPR.App
                 for (var j = 0; j < cols; j++)
                 {
                     field.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
-                    var cell = new Cell(i, j, coreField);
+                    var cell = new Cell(i, j, this);
                     cell.Name = string.Format("c{0}{1}", i, j);
 
                     cell.SetValue(Grid.RowProperty, i);
