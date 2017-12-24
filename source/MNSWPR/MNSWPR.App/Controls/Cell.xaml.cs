@@ -30,6 +30,8 @@ namespace MNSWPR.App.Controls
 
         public event ClickHandler EmptyCellClicked;
         public event ClickHandler MinedCellClicked;
+        public event ClickHandler FlagSet;
+        public event ClickHandler FlagUnset;
         public delegate void ClickHandler(Cell clickedCell, EmptyCellClickedEventArgs args);
 
 
@@ -92,12 +94,20 @@ namespace MNSWPR.App.Controls
             {
                 cellField.Background = Brushes.Yellow;
                 state = CellState.FlagSet;
+                if (FlagSet != null)
+                {
+                    FlagSet(this, new EmptyCellClickedEventArgs());
+                }
                 return;
             }
             if (state == CellState.FlagSet)
             {
                 cellField.Background = Brushes.LightGray;
                 state = CellState.NotClicked;
+                if (FlagUnset != null)
+                {
+                    FlagUnset(this, new EmptyCellClickedEventArgs());
+                }
                 return;
             }
         }

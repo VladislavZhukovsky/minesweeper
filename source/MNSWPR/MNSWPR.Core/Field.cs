@@ -11,6 +11,7 @@ namespace MNSWPR.Core
         private int rows;
         private int cols;
         private int mineCount;
+        private int minesFound;
 
         //keep ALL cells (not only mined) to access cell directly ( O(1) operation)
         //true if mined
@@ -38,6 +39,26 @@ namespace MNSWPR.Core
         public bool Mined(int row, int col)
         {
             return cells[row * rows + col];
+        }
+
+        public int MinesFound
+        {
+            get
+            {
+                return minesFound;
+            }
+            set
+            {
+                minesFound = value;
+            }
+        }
+
+        public int MineCount
+        {
+            get
+            {
+                return mineCount;
+            }
         }
 
         public int CountMinesAround(int row, int col)

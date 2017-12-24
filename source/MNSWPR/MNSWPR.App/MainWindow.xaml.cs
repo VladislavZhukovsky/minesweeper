@@ -65,9 +65,23 @@ namespace MNSWPR.App
                     field.Children.Add(cell);
                     cell.EmptyCellClicked += OnEmptyCellClicked;
                     cell.MinedCellClicked += OnMinedCellClicked;
+                    cell.FlagSet += OnFlagSet;
+                    cell.FlagUnset += OnFlagUnset;
                     cells.Add(cell);
                 }
             }
+
+            mineCounter.Text = mineCount.ToString();
+        }
+
+        private void OnFlagUnset(Cell clickedCell, EmptyCellClickedEventArgs args)
+        {
+            mineCounter.Text = (coreField.MineCount - --coreField.MinesFound).ToString();
+        }
+
+        private void OnFlagSet(Cell clickedCell, EmptyCellClickedEventArgs args)
+        {
+            mineCounter.Text = (coreField.MineCount - ++coreField.MinesFound).ToString();
         }
 
         private void OnEmptyCellClicked(Cell clickedCell, EmptyCellClickedEventArgs args)
