@@ -110,7 +110,11 @@ namespace MNSWPR.App.Controls
                 var mined = parent.Field.Mined(row, col);
                 if (mined)
                 {
-                    cellField.Background = Brushes.Red;
+                    Explode();
+                    if (MinedCellClicked != null)
+                    {
+                        MinedCellClicked(this, new EmptyCellClickedEventArgs());
+                    }
                 }
                 else
                 {
@@ -121,6 +125,23 @@ namespace MNSWPR.App.Controls
                     }
                 }
                 state = CellState.Clicked;
+            }
+        }
+
+        //Method separated to enable explosion of the rest of cells independently from the state
+        public void Explode()
+        {
+            if (state == CellState.NotClicked)
+            {
+                cellField.Background = Brushes.Red;
+            }
+            if (state == CellState.FlagSet)
+            {
+                cellField.Background = Brushes.Orange;
+            }
+            if (state == CellState.Processing)//cell that explodes first and processing now
+            {
+                cellField.Background = Brushes.DarkRed;
             }
         }
     }

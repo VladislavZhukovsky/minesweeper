@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -45,7 +46,7 @@ namespace MNSWPR.App
         {
             var rows = 10;
             var cols = 10;
-            var mineCount = 13;
+            var mineCount = 11;
 
             coreField = new Core.Field(rows, cols, mineCount);
 
@@ -63,6 +64,7 @@ namespace MNSWPR.App
                     cell.text.Visibility = Visibility.Hidden;
                     field.Children.Add(cell);
                     cell.EmptyCellClicked += OnEmptyCellClicked;
+                    cell.MinedCellClicked += OnMinedCellClicked;
                     cells.Add(cell);
                 }
             }
@@ -84,6 +86,22 @@ namespace MNSWPR.App
             {
                 clickedCell.text.Text = minesAround.ToString();
                 clickedCell.text.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void OnMinedCellClicked(Cell clickedCell, EmptyCellClickedEventArgs args)
+        {
+            foreach (var cell in cells)
+            {
+                cell.MinedCellClicked -= OnMinedCellClicked;
+                cell.EmptyCellClicked -= OnEmptyCellClicked;
+            }
+            foreach(var cell in cells)
+            {
+                if (coreField.Mined(cell.Row, cell.Col)) //keep mined cells from separate collection?
+                {
+                    cell.Explode();
+                }
             }
         }
 
