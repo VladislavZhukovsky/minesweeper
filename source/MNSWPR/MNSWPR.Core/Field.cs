@@ -26,6 +26,9 @@ namespace MNSWPR.Core
             SetMines();
         }
 
+        public int Rows { get { return rows; } }
+        public int Cols { get { return cols; } }
+
         private void SetMines()
         {
             var r = new Randomizer();

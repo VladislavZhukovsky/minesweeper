@@ -24,7 +24,8 @@ namespace MNSWPR.App
     public partial class MainWindow : Window
     {
         private Core.Field coreField;
-        private List<Controls.Cell> cells = new List<Controls.Cell>();
+        private List<Controls.Cell> cells;
+        private int cellsClicked;
 
         public MainWindow()
         {
@@ -49,7 +50,8 @@ namespace MNSWPR.App
             var mineCount = 11;
 
             coreField = new Core.Field(rows, cols, mineCount);
-
+            cellsClicked = 0;
+            cells = new List<Cell>();
             for (var i = 0; i < rows; i++)
             {
                 field.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
@@ -82,6 +84,7 @@ namespace MNSWPR.App
         private void OnFlagSet(Cell clickedCell, EmptyCellClickedEventArgs args)
         {
             mineCounter.Text = (coreField.MineCount - ++coreField.MinesFound).ToString();
+            CheckVictory();
         }
 
         private void OnEmptyCellClicked(Cell clickedCell, EmptyCellClickedEventArgs args)
@@ -101,6 +104,8 @@ namespace MNSWPR.App
                 clickedCell.text.Text = minesAround.ToString();
                 clickedCell.text.Visibility = Visibility.Visible;
             }
+            cellsClicked++;
+            CheckVictory();
         }
 
         private void OnMinedCellClicked(Cell clickedCell, EmptyCellClickedEventArgs args)
@@ -127,9 +132,13 @@ namespace MNSWPR.App
             //}
             InitializeField();
         }
-        private void CellClicked(int row, int col)
+
+        private void CheckVictory()
         {
-            throw new NotImplementedException();
+            if (cellsClicked + coreField.MineCount == coreField.Rows * coreField.Cols && coreField.MinesFound == coreField.MineCount)
+            {
+                MessageBox.Show("You win!");
+            }
         }
     }
 }
