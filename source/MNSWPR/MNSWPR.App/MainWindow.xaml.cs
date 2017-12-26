@@ -52,6 +52,7 @@ namespace MNSWPR.App
             coreField = new Core.Field(rows, cols, mineCount);
             cellsClicked = 0;
             cells = new List<Cell>();
+            FirstStepDone = false;
             for (var i = 0; i < rows; i++)
             {
                 field.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
