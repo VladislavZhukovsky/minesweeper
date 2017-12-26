@@ -6,23 +6,32 @@
         xmlns:controls="clr-namespace:MNSWPR.App.Controls"
         xmlns:local="clr-namespace:MNSWPR.App"
         mc:Ignorable="d"
-        Title="MNSWPR" ResizeMode="NoResize" Height="380" Width="316">
-    <Grid Height="370" Width="300">
+        Title="MNSWPR" ResizeMode="NoResize" Height="705" Width="622">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="300"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Name="field" Grid.Row="0" VerticalAlignment="Top" Height="300" Width="300">
+        <Border Width="606" VerticalAlignment="Top" Grid.Row="0" BorderBrush="Black" BorderThickness="3">
+            <Grid Name="field" VerticalAlignment="Top">
 
-        </Grid>
+            </Grid>
+        </Border>
         <!--<Button Name="Start" Background="Green" Foreground="WhiteSmoke" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" Grid.Row="1" Height="30" Width="80" Click="Start_Click">Start!</Button>-->
-        <TextBlock Padding="0,5,0,0" Name="Start" Foreground="WhiteSmoke" TextAlignment="Center" VerticalAlignment="Center" Background="Green" HorizontalAlignment="Right" Margin="0,0,10,0" Grid.Row="1" Height="30" Width="80" MouseLeftButtonUp="Start_Click">Start!</TextBlock>
         <TextBlock 
-            Name="mineCounter"
-            Grid.Row="1"
-             Height="40" Width="60" HorizontalAlignment="Left" Margin="10,0,0,0"
-            TextAlignment="Center" FontWeight="Bold" FontSize="30" FontFamily="Verdana"
-            Background="Black" Foreground="Red">
+            Name="Start"
+            Grid.Row="1" 
+            Height="40" Width="80" VerticalAlignment="Center" HorizontalAlignment="Right"
+            Margin="0,0,10,0" Padding="0,8,0,0" 
+            Background="Green" Foreground="WhiteSmoke"
+            TextAlignment="Center" FontWeight="Bold" FontSize="16"
+            MouseLeftButtonUp="Start_Click">Start!</TextBlock>
+        <TextBlock 
+                Name="mineCounter"
+                Grid.Row="1"
+                Height="40" Width="60" HorizontalAlignment="Left" Margin="10,0,0,0"
+                TextAlignment="Center" FontWeight="Bold" FontSize="30" FontFamily="Verdana"
+                Background="Black" Foreground="Red">
         </TextBlock>
     </Grid>
 </Window>

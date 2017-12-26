@@ -45,9 +45,9 @@ namespace MNSWPR.App
 
         private void InitializeField()
         {
-            var rows = 10;
-            var cols = 10;
-            var mineCount = 11;
+            var rows = 20;
+            var cols = 20;
+            var mineCount = 50;
 
             coreField = new Core.Field(rows, cols, mineCount);
             cellsClicked = 0;
