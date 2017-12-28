@@ -113,9 +113,9 @@ namespace MNSWPR.App
         {
             foreach (var cell in cells)
             {
-                cell.MinedCellClicked -= OnMinedCellClicked;
-                cell.EmptyCellClicked -= OnEmptyCellClicked;
                 cell.BlockCell();
+                //cell.MinedCellClicked -= OnMinedCellClicked;
+                //cell.EmptyCellClicked -= OnEmptyCellClicked;
             }
             foreach(var cell in cells)
             {
@@ -139,6 +139,10 @@ namespace MNSWPR.App
         {
             if (cellsClicked + coreField.MineCount == coreField.Rows * coreField.Cols && coreField.MinesFound == coreField.MineCount)
             {
+                foreach(var cell in cells)
+                {
+                    cell.BlockCell();
+                }
                 MessageBox.Show("You win!");
             }
         }
