@@ -31,6 +31,12 @@ namespace MNSWPR.App
         {
             InitializeComponent();
             InitializeField();
+            this.Closed += MainWindow_Closed;
+        }
+
+        private void MainWindow_Closed(object sender, System.EventArgs e)
+        {
+            Application.Current.Shutdown();
         }
 
         public Core.Field Field
