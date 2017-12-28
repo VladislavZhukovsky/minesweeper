@@ -115,6 +115,7 @@ namespace MNSWPR.App
             {
                 cell.MinedCellClicked -= OnMinedCellClicked;
                 cell.EmptyCellClicked -= OnEmptyCellClicked;
+                cell.BlockCell();
             }
             foreach(var cell in cells)
             {

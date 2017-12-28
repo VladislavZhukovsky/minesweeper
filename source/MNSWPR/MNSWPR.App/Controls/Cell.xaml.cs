@@ -154,5 +154,11 @@ namespace MNSWPR.App.Controls
                 cellField.Background = Brushes.DarkRed;
             }
         }
+
+        public void BlockCell()
+        {
+            MouseLeftButtonUp -= Cell_MouseLeftButtonUp;
+            MouseRightButtonUp -= Cell_MouseRightButtonUp;
+        }
     }
 }
