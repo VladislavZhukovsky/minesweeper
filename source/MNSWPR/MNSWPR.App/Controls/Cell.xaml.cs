@@ -147,7 +147,7 @@ namespace MNSWPR.App.Controls
             }
             if (state == CellState.FlagSet)
             {
-                cellField.Background = Brushes.Orange;
+                cellField.Background = Brushes.DarkOrange;
             }
             if (state == CellState.Processing)//cell that explodes first and processing now
             {

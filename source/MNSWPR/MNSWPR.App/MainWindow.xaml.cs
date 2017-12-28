@@ -124,6 +124,7 @@ namespace MNSWPR.App
                     cell.Explode();
                 }
             }
+            MessageBox.Show("It blows your mind!");
         }
 
         private void Start_Click(object sender, RoutedEventArgs e)
@@ -143,7 +144,7 @@ namespace MNSWPR.App
                 {
                     cell.BlockCell();
                 }
-                MessageBox.Show("You win!");
+                MessageBox.Show("This time you win!");
             }
         }
     }
