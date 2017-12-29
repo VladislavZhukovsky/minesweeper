@@ -120,17 +120,14 @@ namespace MNSWPR.App
             foreach (var cell in cells)
             {
                 cell.BlockCell();
-                //cell.MinedCellClicked -= OnMinedCellClicked;
-                //cell.EmptyCellClicked -= OnEmptyCellClicked;
-            }
-            foreach(var cell in cells)
-            {
                 if (coreField.Mined(cell.Row, cell.Col)) //keep mined cells from separate collection?
                 {
                     cell.Explode();
                 }
+                //cell.MinedCellClicked -= OnMinedCellClicked;
+                //cell.EmptyCellClicked -= OnEmptyCellClicked;
             }
-            MessageBox.Show("It blows your mind!");
+            MessageBox.Show("That's fiasco brother");
         }
 
         private void Start_Click(object sender, RoutedEventArgs e)
@@ -150,7 +147,7 @@ namespace MNSWPR.App
                 {
                     cell.BlockCell();
                 }
-                MessageBox.Show("This time you win!");
+                MessageBox.Show("You win this time!");
             }
         }
     }
